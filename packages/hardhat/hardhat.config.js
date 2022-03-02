@@ -1,3 +1,6 @@
+/* eslint-disable new-cap */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
 require("dotenv").config();
 const { utils } = require("ethers");
 const fs = require("fs");
