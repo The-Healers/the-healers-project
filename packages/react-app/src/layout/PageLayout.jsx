@@ -1,10 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Header from "./Header";
 
 export const PageLayout = () => {
   return (
     <div>
-      <header>Header</header>
+      <Header />
       <Outlet />
       <footer>Footer</footer>
     </div>

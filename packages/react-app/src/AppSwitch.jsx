@@ -1,11 +1,8 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { PageLayout } from "./layout/PageLayout";
 import { Home } from "./pages/Home";
-
-import App from "./App";
-
-const subgraphUri = "http://localhost:8000/subgraphs/name/scaffold-eth/your-contract";
+import { useMetaMask } from "./providers/MetaMaskProvider";
 
 export const AppSwitch = () => {
   return (
@@ -13,11 +10,24 @@ export const AppSwitch = () => {
       <Routes>
         <Route path="/" element={<PageLayout />}>
           <Route index element={<Home />} />
-          <Route path="/example">
+          <Route
+            path="/protected-test"
+            element={
+              <RequireWallet>
+                <div>my wallet is connected</div>
+              </RequireWallet>
+            }
+          />
+          {/* <Route path="/example">
             <App subgraphUri={subgraphUri} />
-          </Route>
+          </Route> */}
         </Route>
       </Routes>
     </>
   );
+};
+
+const RequireWallet = ({ children }) => {
+  const { isWalletConnected } = useMetaMask();
+  return isWalletConnected ? children : <Navigate to="/" />;
 };
